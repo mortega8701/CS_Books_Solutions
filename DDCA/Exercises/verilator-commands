@@ -1,0 +1,1 @@
+verilator --binary -j 0 --trace --assert <DESIGN_CODE> <TESTBENCH>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project source="3.7.2" version="1.0">
+  This file is intended to be loaded by Logisim-evolution v3.7.2(https://github.com/logisim-evolution/).
+
+  <lib desc="#Wiring" name="0">
+    <tool name="Pin">
+      <a name="appearance" val="classic"/>
+    </tool>
+    <tool name="Transistor">
+      <a name="facing" val="south"/>
+    </tool>
+  </lib>
+  <lib desc="#Gates" name="1"/>
+  <lib desc="#Plexers" name="2"/>
+  <lib desc="#Arithmetic" name="3"/>
+  <lib desc="#Memory" name="4"/>
+  <lib desc="#I/O" name="5"/>
+  <lib desc="#Base" name="6">
+    <tool name="Text Tool">
+      <a name="font" val="SansSerif plain 12"/>
+    </tool>
+  </lib>
+  <main name="Exercise_171A"/>
+  <options>
+    <a name="gateUndefined" val="ignore"/>
+    <a name="simlimit" val="1000"/>
+    <a name="simrand" val="0"/>
+  </options>
+  <mappings>
+    <tool lib="6" map="Button2" name="Menu Tool"/>
+    <tool lib="6" map="Button3" name="Menu Tool"/>
+    <tool lib="6" map="Ctrl Button1" name="Menu Tool"/>
+  </mappings>
+  <toolbar>
+    <tool lib="6" name="Poke Tool"/>
+    <tool lib="6" name="Edit Tool"/>
+    <tool lib="6" name="Wiring Tool"/>
+    <tool lib="6" name="Text Tool">
+      <a name="font" val="SansSerif plain 12"/>
+    </tool>
+    <sep/>
+    <tool lib="0" name="Pin"/>
+    <tool lib="0" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+    </tool>
+    <sep/>
+    <tool lib="1" name="NOT Gate"/>
+    <tool lib="1" name="AND Gate"/>
+    <tool lib="1" name="OR Gate"/>
+    <tool lib="1" name="XOR Gate"/>
+    <tool lib="1" name="NAND Gate"/>
+    <tool lib="1" name="NOR Gate"/>
+    <sep/>
+    <tool lib="4" name="D Flip-Flop"/>
+    <tool lib="4" name="Register"/>
+  </toolbar>
+  <circuit name="Exercise_171A">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="Exercise_171A"/>
+    <a name="clabelfont" val="SansSerif plain 12"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="0" loc="(130,40)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="Y"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(60,20)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(60,40)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="0" loc="(60,60)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="C"/>
+    </comp>
+    <comp lib="1" loc="(120,40)" name="OR Gate">
+      <a name="inputs" val="3"/>
+    </comp>
+    <wire from="(120,40)" to="(130,40)"/>
+    <wire from="(60,20)" to="(70,20)"/>
+    <wire from="(60,40)" to="(70,40)"/>
+    <wire from="(60,60)" to="(70,60)"/>
+  </circuit>
+  <circuit name="Exercise_171B">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="Exercise_171B"/>
+    <a name="clabelfont" val="SansSerif plain 12"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="0" loc="(140,40)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="Y"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(60,20)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(60,40)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="0" loc="(60,60)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="C"/>
+    </comp>
+    <comp lib="1" loc="(130,40)" name="XOR Gate">
+      <a name="inputs" val="3"/>
+      <a name="xor" val="odd"/>
+    </comp>
+    <wire from="(130,40)" to="(140,40)"/>
+    <wire from="(60,20)" to="(70,20)"/>
+    <wire from="(60,40)" to="(70,40)"/>
+    <wire from="(60,60)" to="(70,60)"/>
+  </circuit>
+  <circuit name="Exercise_171C">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="Exercise_171C"/>
+    <a name="clabelfont" val="SansSerif plain 12"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="0" loc="(160,50)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="Y"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(60,20)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(60,40)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="0" loc="(60,60)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="C"/>
+    </comp>
+    <comp lib="0" loc="(60,80)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="D"/>
+    </comp>
+    <comp lib="1" loc="(150,50)" name="XNOR Gate">
+      <a name="inputs" val="4"/>
+    </comp>
+    <wire from="(150,50)" to="(160,50)"/>
+    <wire from="(60,20)" to="(70,20)"/>
+    <wire from="(60,40)" to="(80,40)"/>
+    <wire from="(60,60)" to="(80,60)"/>
+    <wire from="(60,80)" to="(70,80)"/>
+    <wire from="(70,20)" to="(70,30)"/>
+    <wire from="(70,30)" to="(80,30)"/>
+    <wire from="(70,70)" to="(70,80)"/>
+    <wire from="(70,70)" to="(80,70)"/>
+  </circuit>
+  <circuit name="Exercise_172A">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="Exercise_172A"/>
+    <a name="clabelfont" val="SansSerif plain 12"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="0" loc="(140,50)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="Y"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(60,20)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(60,40)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="0" loc="(60,60)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="C"/>
+    </comp>
+    <comp lib="0" loc="(60,80)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="D"/>
+    </comp>
+    <comp lib="1" loc="(130,50)" name="OR Gate">
+      <a name="inputs" val="4"/>
+    </comp>
+    <wire from="(130,50)" to="(140,50)"/>
+    <wire from="(60,20)" to="(70,20)"/>
+    <wire from="(60,40)" to="(80,40)"/>
+    <wire from="(60,60)" to="(80,60)"/>
+    <wire from="(60,80)" to="(70,80)"/>
+    <wire from="(70,20)" to="(70,30)"/>
+    <wire from="(70,30)" to="(80,30)"/>
+    <wire from="(70,70)" to="(70,80)"/>
+    <wire from="(70,70)" to="(80,70)"/>
+  </circuit>
+  <circuit name="Exercise_172B">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="Exercise_172B"/>
+    <a name="clabelfont" val="SansSerif plain 12"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="0" loc="(150,40)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="Y"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(60,20)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(60,40)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="0" loc="(60,60)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="C"/>
+    </comp>
+    <comp lib="1" loc="(140,40)" name="XNOR Gate">
+      <a name="inputs" val="3"/>
+      <a name="xor" val="odd"/>
+    </comp>
+    <wire from="(140,40)" to="(150,40)"/>
+    <wire from="(60,20)" to="(70,20)"/>
+    <wire from="(60,40)" to="(70,40)"/>
+    <wire from="(60,60)" to="(70,60)"/>
+  </circuit>
+  <circuit name="Exercise_172C">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="Exercise_172C"/>
+    <a name="clabelfont" val="SansSerif plain 12"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="0" loc="(150,60)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="Y"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(60,100)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="E"/>
+    </comp>
+    <comp lib="0" loc="(60,20)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(60,40)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="0" loc="(60,60)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="C"/>
+    </comp>
+    <comp lib="0" loc="(60,80)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="D"/>
+    </comp>
+    <comp lib="1" loc="(140,60)" name="NAND Gate">
+      <a name="inputs" val="5"/>
+    </comp>
+    <wire from="(140,60)" to="(150,60)"/>
+    <wire from="(60,100)" to="(70,100)"/>
+    <wire from="(60,20)" to="(70,20)"/>
+    <wire from="(60,40)" to="(60,50)"/>
+    <wire from="(60,50)" to="(80,50)"/>
+    <wire from="(60,60)" to="(80,60)"/>
+    <wire from="(60,70)" to="(60,80)"/>
+    <wire from="(60,70)" to="(80,70)"/>
+    <wire from="(70,20)" to="(70,40)"/>
+    <wire from="(70,40)" to="(80,40)"/>
+    <wire from="(70,80)" to="(70,100)"/>
+    <wire from="(70,80)" to="(80,80)"/>
+  </circuit>
+</project>

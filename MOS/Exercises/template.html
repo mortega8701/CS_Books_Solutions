@@ -1,0 +1,79 @@
+<body style="color: white; background-color: black;">
+<pre>
+<font color="#F8E45C"><u style="text-decoration-style:solid">  1 </u></font><font color="#5FD7FF"><u style="text-decoration-style:solid">#include </u></font><font color="#C061CB"><u style="text-decoration-style:solid">&lt;pthread.h&gt;</u></font><u style="text-decoration-style:solid">                                                                                                                                                 </u>
+<font color="#F8E45C">  2 </font><span style="background-color:#6C6C6C"><font color="#5FD7FF">#</font></span><font color="#5FD7FF">include </font><font color="#C061CB">&lt;err.h&gt;</font>
+<font color="#F8E45C">  3 </font><span style="background-color:#6C6C6C"><font color="#5FD7FF">#</font></span><font color="#5FD7FF">include </font><font color="#C061CB">&lt;errno.h&gt;</font>
+<font color="#F8E45C">  4 </font><span style="background-color:#6C6C6C"><font color="#5FD7FF">#</font></span><font color="#5FD7FF">include </font><font color="#C061CB">&lt;stdio.h&gt;</font>
+<font color="#F8E45C">  5 </font><span style="background-color:#6C6C6C"><font color="#5FD7FF">#</font></span><font color="#5FD7FF">include </font><font color="#C061CB">&lt;stdlib.h&gt;</font>
+<font color="#F8E45C">  6 </font><span style="background-color:#6C6C6C"><font color="#5FD7FF">#</font></span><font color="#5FD7FF">include </font><font color="#C061CB">&lt;unistd.h&gt;</font>
+<font color="#F8E45C">  7 </font><span style="background-color:#6C6C6C"><font color="#5FD7FF">#</font></span><font color="#5FD7FF">include </font><font color="#C061CB">&lt;limits.h&gt;</font>
+<font color="#F8E45C">  8 </font><span style="background-color:#6C6C6C"><font color="#5FD7FF">#</font></span><font color="#5FD7FF">include </font><font color="#C061CB">&lt;stdbool.h&gt;</font>
+<font color="#F8E45C">  9 </font><span style="background-color:#6C6C6C"> </span>
+<font color="#F8E45C"> 10 </font><span style="background-color:#6C6C6C"><font color="#5FD7FF">#</font></span><font color="#5FD7FF">define NUMBER_OF_THREADS </font><font color="#C061CB">8</font>
+<font color="#F8E45C"> 11 </font><span style="background-color:#6C6C6C"> </span>
+<font color="#F8E45C"> 12 </font><span style="background-color:#6C6C6C"><font color="#87FFAF">v</font></span><font color="#87FFAF">olatile</font> <font color="#87FFAF">int</font> entering[NUMBER_OF_THREADS];
+<font color="#F8E45C"> 13 </font><span style="background-color:#6C6C6C"><font color="#87FFAF">v</font></span><font color="#87FFAF">olatile</font> <font color="#87FFAF">int</font> number[NUMBER_OF_THREADS];
+<font color="#F8E45C"> 14 </font><span style="background-color:#6C6C6C"><font color="#87FFAF">i</font></span><font color="#87FFAF">nt</font> shared_counter=<font color="#C061CB">0</font>;
+<font color="#F8E45C"> 15 </font><span style="background-color:#6C6C6C"> </span>
+<font color="#F8E45C"> 16 </font><span style="background-color:#6C6C6C"><font color="#87FFAF">i</font></span><font color="#87FFAF">nt</font> max(<font color="#87FFAF">volatile</font> <font color="#87FFAF">int</font>* array, <font color="#87FFAF">int</font> size) {
+<font color="#F8E45C"> 17 </font><span style="background-color:#6C6C6C"> </span>   <font color="#87FFAF">int</font> result = *(array);
+<font color="#F8E45C"> 18 </font><span style="background-color:#6C6C6C"> </span>   <font color="#F8E45C">for</font>(<font color="#87FFAF">int</font> i=<font color="#C061CB">0</font>; i&lt;size; i++) {
+<font color="#F8E45C"> 19 </font><span style="background-color:#6C6C6C"> </span>       <font color="#F8E45C">if</font>(result&lt;*(array+i)){
+<font color="#F8E45C"> 20 </font><span style="background-color:#6C6C6C"> </span>           result = *(array+i);
+<font color="#F8E45C"> 21 </font><span style="background-color:#6C6C6C"> </span>       }
+<font color="#F8E45C"> 22 </font><span style="background-color:#6C6C6C"> </span>   }
+<font color="#F8E45C"> 23 </font><span style="background-color:#6C6C6C"> </span>   <font color="#F8E45C">return</font> result;
+<font color="#F8E45C"> 24 </font><span style="background-color:#6C6C6C">}</span>
+<font color="#F8E45C"> 25 </font><span style="background-color:#6C6C6C"> </span>
+<font color="#F8E45C"> 26 </font><span style="background-color:#6C6C6C"><font color="#87FFAF">v</font></span><font color="#87FFAF">oid</font> lock(<font color="#87FFAF">int</font> i) {
+<font color="#F8E45C"> 27 </font><span style="background-color:#6C6C6C"> </span>   entering[i] = <font color="#C061CB">true</font>;
+<font color="#F8E45C"> 28 </font><span style="background-color:#6C6C6C"> </span>   number[i] = <font color="#C061CB">1</font> + max(&amp;number[<font color="#C061CB">0</font>], <font color="#F8E45C">sizeof</font>(number)/<font color="#F8E45C">sizeof</font>(<font color="#87FFAF">int</font>));
+<font color="#F8E45C"> 29 </font><span style="background-color:#6C6C6C"> </span>   entering[i] = <font color="#C061CB">false</font>;
+<font color="#F8E45C"> 30 </font><span style="background-color:#6C6C6C"> </span>   <font color="#F8E45C">for</font> (<font color="#87FFAF">int</font> j = <font color="#C061CB">0</font>; j &lt; NUMBER_OF_THREADS; j++) {
+<font color="#F8E45C"> 31 </font><span style="background-color:#6C6C6C"> </span>       <font color="#F8E45C">while</font> (entering[j]);
+<font color="#F8E45C"> 32 </font><span style="background-color:#6C6C6C"> </span>       <font color="#F8E45C">while</font> (number[j] != <font color="#C061CB">0</font> &amp;&amp;
+<font color="#F8E45C"> 33 </font><span style="background-color:#6C6C6C"> </span>             (number[j] &lt; number[i] || (number[j] == number[i] &amp;&amp; j &lt; i)));
+<font color="#F8E45C"> 34 </font><span style="background-color:#6C6C6C"> </span>   }
+<font color="#F8E45C"> 35 </font><span style="background-color:#6C6C6C">}</span>
+<font color="#F8E45C"> 36 </font><span style="background-color:#6C6C6C"> </span>
+<font color="#F8E45C"> 37 </font><span style="background-color:#6C6C6C"><font color="#87FFAF">v</font></span><font color="#87FFAF">oid</font> unlock(<font color="#87FFAF">int</font> i) {
+<font color="#F8E45C"> 38 </font><span style="background-color:#6C6C6C"> </span>   number[i] = <font color="#C061CB">0</font>;
+<font color="#F8E45C"> 39 </font><span style="background-color:#6C6C6C">}</span>
+<font color="#F8E45C"> 40 </font><span style="background-color:#6C6C6C"> </span>
+<font color="#F8E45C"> 41 </font><span style="background-color:#6C6C6C"><font color="#87FFAF">v</font></span><font color="#87FFAF">oid</font> *bakery(<font color="#87FFAF">void</font> *ptr_tid)
+<font color="#F8E45C"> 42 </font><span style="background-color:#6C6C6C">{</span>
+<font color="#F8E45C"> 43 </font><span style="background-color:#6C6C6C"> </span>   <font color="#87FFAF">int</font> tid = *(<font color="#87FFAF">int</font>*)ptr_tid;
+<font color="#F8E45C"> 44 </font><span style="background-color:#6C6C6C"> </span>   free(ptr_tid);
+<font color="#F8E45C"> 45 </font><span style="background-color:#6C6C6C"> </span>   <font color="#F8E45C">while</font>(<font color="#C061CB">true</font>) {
+<font color="#F8E45C"> 46 </font><span style="background-color:#6C6C6C"> </span>       lock(tid);
+<font color="#F8E45C"> 47 </font><span style="background-color:#6C6C6C"> </span>       <font color="#F8E45C">if</font> (shared_counter &gt;= <font color="#C061CB">INT_MAX</font>-<font color="#C061CB">1</font>) {
+<font color="#F8E45C"> 48 </font><span style="background-color:#6C6C6C"> </span>           unlock(tid);
+<font color="#F8E45C"> 49 </font><span style="background-color:#6C6C6C"> </span>           <font color="#F8E45C">break</font>;
+<font color="#F8E45C"> 50 </font><span style="background-color:#6C6C6C"> </span>       }
+<font color="#F8E45C"> 51 </font><span style="background-color:#6C6C6C"> </span>       shared_counter++;
+<font color="#F8E45C"> 52 </font><span style="background-color:#6C6C6C"> </span>       printf(<font color="#C061CB">&quot;Hey, Critical section of thread </font><font color="#FFD7D7">%d</font><font color="#C061CB"> here!, Counter is at </font><font color="#FFD7D7">%d\n</font><font color="#C061CB">&quot;</font>, tid, shared_counter);
+<font color="#F8E45C"> 53 </font><span style="background-color:#6C6C6C"> </span>       unlock(tid);
+<font color="#F8E45C"> 54 </font><span style="background-color:#6C6C6C"> </span>   }
+<font color="#F8E45C"> 55 </font><span style="background-color:#6C6C6C"> </span>   pthread_exit(<font color="#C061CB">NULL</font>);
+<font color="#F8E45C"> 56 </font><span style="background-color:#6C6C6C">}</span>
+<font color="#F8E45C"> 57 </font><span style="background-color:#6C6C6C"> </span>
+<font color="#F8E45C"> 58 </font><span style="background-color:#6C6C6C"><font color="#87FFAF">i</font></span><font color="#87FFAF">nt</font> main(<font color="#87FFAF">int</font> argc, <font color="#87FFAF">char</font> *argv[])
+<font color="#F8E45C"> 59 </font><span style="background-color:#6C6C6C">{</span>
+<font color="#F8E45C"> 60 </font><span style="background-color:#6C6C6C"> </span>   pthread_t threads[NUMBER_OF_THREADS];
+<font color="#F8E45C"> 61 </font><span style="background-color:#6C6C6C"> </span>
+<font color="#F8E45C"> 62 </font><span style="background-color:#6C6C6C"> </span>   <font color="#F8E45C">for</font>(<font color="#87FFAF">int</font> i=<font color="#C061CB">0</font>; i&lt;NUMBER_OF_THREADS; i++)
+<font color="#F8E45C"> 63 </font><span style="background-color:#6C6C6C"> </span>   {
+<font color="#F8E45C"> 64 </font><span style="background-color:#6C6C6C"> </span>       <font color="#87FFAF">int</font> *ptr_i = malloc(<font color="#F8E45C">sizeof</font>(<font color="#87FFAF">int</font>));
+<font color="#F8E45C"> 65 </font><span style="background-color:#6C6C6C"> </span>       *ptr_i = i;
+<font color="#F8E45C"> 66 </font><span style="background-color:#6C6C6C"> </span>       printf(<font color="#C061CB">&quot;Main here. Creating thread </font><font color="#FFD7D7">%d\n</font><font color="#C061CB">&quot;</font>, i);
+<font color="#F8E45C"> 67 </font><span style="background-color:#6C6C6C"> </span>       <font color="#F8E45C">if</font> (pthread_create(&amp;threads[i], <font color="#C061CB">NULL</font>, &amp;bakery, ptr_i) != <font color="#C061CB">0</font>)
+<font color="#F8E45C"> 68 </font><span style="background-color:#6C6C6C"> </span>           err(errno, <font color="#C061CB">&quot;Failed creating thread&quot;</font>);
+<font color="#F8E45C"> 69 </font><span style="background-color:#6C6C6C"> </span>   }
+<font color="#F8E45C"> 70 </font><span style="background-color:#6C6C6C"> </span>   <font color="#F8E45C">for</font>(<font color="#87FFAF">int</font> i=<font color="#C061CB">0</font>; i&lt;NUMBER_OF_THREADS; i++)
+<font color="#F8E45C"> 71 </font><span style="background-color:#6C6C6C"> </span>   {
+<font color="#F8E45C"> 72 </font><span style="background-color:#6C6C6C"> </span>       pthread_join(threads[i], <font color="#C061CB">NULL</font>);
+<font color="#F8E45C"> 73 </font><span style="background-color:#6C6C6C"> </span>   }
+<font color="#F8E45C"> 74 </font><span style="background-color:#6C6C6C"> </span>   exit(<font color="#C061CB">0</font>);
+<font color="#F8E45C"> 75 </font><span style="background-color:#6C6C6C">}</span>
+</pre>
+</body>
